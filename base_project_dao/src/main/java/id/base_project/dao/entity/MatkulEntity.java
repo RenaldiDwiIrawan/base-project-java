@@ -1,9 +1,8 @@
 package id.base_project.dao.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javafx.css.StyleableIntegerProperty;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "matkul")
@@ -16,8 +15,11 @@ public class MatkulEntity {
     @Column(name = "nama_matkul")
     private String namaMatkul;
 
+    @Column(name = "semesterMatkul")
+    private Integer semesterMatkul;
+
     @Column(name = "sks_matkul")
-    private String sksMatkul;
+    private Integer sksMatkul;
 
     public String getCodeMatkul() {
         return codeMatkul;
@@ -35,11 +37,19 @@ public class MatkulEntity {
         this.namaMatkul = namaMatkul;
     }
 
-    public String getSksMatkul() {
+    public Integer getSemesterMatkul() {
+        return semesterMatkul;
+    }
+
+    public void setSemesterMatkul(Integer semesterMatkul) {
+        this.semesterMatkul = semesterMatkul;
+    }
+
+    public Integer getSksMatkul() {
         return sksMatkul;
     }
 
-    public void setSksMatkul(String sksMatkul) {
+    public void setSksMatkul(Integer sksMatkul) {
         this.sksMatkul = sksMatkul;
     }
 }

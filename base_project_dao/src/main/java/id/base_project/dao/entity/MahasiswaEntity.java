@@ -14,12 +14,14 @@ public class MahasiswaEntity {
     private String namaMahasiswa;
 
 //    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "code_jurusan", referencedColumnName = "code")
+//    @JoinColumn(name = "code_jurusan", referencedColumnName = "code_jurusan")
 //    private JurusanEntity codeJurusan;
 //
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "code_matkul", referencedColumnName = "code_matkul")
-//	private MatkulEntity codeMatkul;
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "code_matkul", referencedColumnName = "code_matkul")
+
+    @Column(name = "semester_mahasiswa")
+    private Integer semesterMahasiswa;
 
     @Column(name = "active_mahasiswa")
     private Boolean activeMahasiswa;
@@ -38,6 +40,22 @@ public class MahasiswaEntity {
 
     public void setNamaMahasiswa(String namaMahasiswa) {
         this.namaMahasiswa = namaMahasiswa;
+    }
+
+//    public JurusanEntity getCodeJurusan() {
+//        return codeJurusan;
+//    }
+//
+//    public void setCodeJurusan(JurusanEntity codeJurusan) {
+//        this.codeJurusan = codeJurusan;
+//    }
+
+    public Integer getSemesterMahasiswa() {
+        return semesterMahasiswa;
+    }
+
+    public void setSemesterMahasiswa(Integer semesterMahasiswa) {
+        this.semesterMahasiswa = semesterMahasiswa;
     }
 
     public Boolean getActiveMahasiswa() {
