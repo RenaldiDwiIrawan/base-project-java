@@ -6,10 +6,9 @@ import javax.persistence.*;
 @Table(name = "mahasiswa")
 public class MahasiswaEntity {
 
-
     @Id
-    @Column(name = "npm")
-    private String npm;
+    @Column(name = "nim")
+    private String nim;
 
     @Column(name = "nama_mahasiswa")
     private String namaMahasiswa;
@@ -25,12 +24,12 @@ public class MahasiswaEntity {
     @Column(name = "active_mahasiswa")
     private Boolean activeMahasiswa;
 
-    public String getNpm() {
-        return npm;
+    public String getNim() {
+        return nim;
     }
 
-    public void setNpm(String npm) {
-        this.npm = npm;
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 
     public String getNamaMahasiswa() {

@@ -1,4 +1,4 @@
-package id.base_project.service.response;
+package id.base_project.common.response;
 
 public class Response {
     String pesan, status;

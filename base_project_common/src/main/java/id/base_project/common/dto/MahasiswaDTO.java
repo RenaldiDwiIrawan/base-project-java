@@ -1,8 +1,8 @@
-package id.base_project.service.dto;
+package id.base_project.common.dto;
 
 public class MahasiswaDTO {
     String namaMahasiswa;
-    Integer NIM;
+    String NIM;
     String namaJurusan;
     String semesterMahasiswa;
     String codeJurusan;
@@ -16,11 +16,11 @@ public class MahasiswaDTO {
         this.namaMahasiswa = namaMahasiswa;
     }
 
-    public Integer getNIM() {
+    public String getNIM() {
         return NIM;
     }
 
-    public void setNIM(Integer NIM) {
+    public void setNIM(String NIM) {
         this.NIM = NIM;
     }
 
@@ -48,7 +48,7 @@ public class MahasiswaDTO {
         this.codeJurusan = codeJurusan;
     }
 
-    public boolean isMahasiswaActive() {
+    public boolean getMahasiswaActive() {
         return mahasiswaActive;
     }
 
