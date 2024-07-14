@@ -3,24 +3,24 @@ package id.base_project.service.impl;
 
 import id.base_project.common.dto.JurusanDTO;
 import id.base_project.common.dto.MahasiswaDTO;
-import id.base_project.common.dto.MahasiswaJoinDTO;
 import id.base_project.common.dto.MatkulDTO;
-import id.base_project.dao.entity.JurusanEntity;
-import id.base_project.dao.entity.MahasiswaEntity;
-import id.base_project.dao.entity.MatkulEntity;
-
-import java.util.List;
+import id.base_project.common.response.Response;
 
 public interface IMahasiswa {
 
-    public MahasiswaDTO addMahasiswa(MahasiswaDTO mahasiswaDTO);
-    public JurusanDTO addJurusan(JurusanDTO jurusanDTO);
-    public MatkulDTO addMatkul(MatkulDTO matkulDTO);
+    public Response addMahasiswa(MahasiswaDTO mahasiswaDTO);
+    public Response addJurusan(JurusanDTO jurusanDTO);
+    public Response addMatkul(MatkulDTO matkulDTO);
 
-    public List<MahasiswaEntity> getAllMahasiswa();
-    public List<JurusanEntity> getAllJurusan();
-    public List<MatkulEntity> getAllMatkul();
-    public MahasiswaJoinDTO getNim(String request);
+    public Response getAllJurusan();
+    public Response getAllMatkul();
 
-    public MahasiswaJoinDTO getMahasiswaByBody(MahasiswaJoinDTO request);
+    public Response getAllMahasiswa();
+    public Response getAllMahasiswa2();
+    public Response getAllMahasiswa3();
+
+    public Response getMahasiswaByNim(String request);
+
+    public void deleteMahasiswaByNim (String nim);
+
 }

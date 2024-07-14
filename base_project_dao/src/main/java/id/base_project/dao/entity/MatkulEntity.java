@@ -9,6 +9,10 @@ import javax.persistence.*;
 public class MatkulEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_matkul")
+    private Long idMatkul;
+
     @Column(name = "code_matkul")
     private String codeMatkul;
 
@@ -20,6 +24,14 @@ public class MatkulEntity {
 
     @Column(name = "sks_matkul")
     private Integer sksMatkul;
+
+    public Long getIdMatkul() {
+        return idMatkul;
+    }
+
+    public void setIdMatkul(Long idMatkul) {
+        this.idMatkul = idMatkul;
+    }
 
     public String getCodeMatkul() {
         return codeMatkul;

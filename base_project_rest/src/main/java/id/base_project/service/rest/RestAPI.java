@@ -3,16 +3,12 @@ package id.base_project.service.rest;
 
 import id.base_project.common.dto.JurusanDTO;
 import id.base_project.common.dto.MahasiswaDTO;
-import id.base_project.common.dto.MahasiswaJoinDTO;
 import id.base_project.common.dto.MatkulDTO;
-import id.base_project.dao.entity.JurusanEntity;
-import id.base_project.dao.entity.MahasiswaEntity;
-import id.base_project.dao.entity.MatkulEntity;
+import id.base_project.common.response.Response;
 import id.base_project.service.impl.IMahasiswa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("base-project/")
@@ -23,47 +19,56 @@ public class RestAPI  {
 
     @GetMapping("testAPI")
     public String testAPI(){
-        String hasil = "test api berhasil";
-        return hasil;
+        return "test api berhasil";
     }
 
     @PostMapping("addMahasiswa")
-    public MahasiswaDTO tambahMahasiswa(@RequestBody MahasiswaDTO request){
+    public Response tambahMahasiswa(@RequestBody MahasiswaDTO request){
         return implMahasiswa.addMahasiswa(request);
     }
 
     @PostMapping("addJurusan")
-    public JurusanDTO tambahJurusan(@RequestBody JurusanDTO request){
+    public Response tambahJurusan(@RequestBody JurusanDTO request){
         return implMahasiswa.addJurusan(request);
     }
 
     @PostMapping("addMatkul")
-    public MatkulDTO tambahMatkul(@RequestBody MatkulDTO request){
+    public Response tambahMatkul(@RequestBody MatkulDTO request){
         return implMahasiswa.addMatkul(request);
     }
 
     @GetMapping("getAllMahasiswa")
-    public List<MahasiswaEntity> getAllMahasiswa(){
+    public Response getAllMahasiswa(){
      return implMahasiswa.getAllMahasiswa();
     }
 
+    @GetMapping("getAllMahasiswa2")
+    public Response getAllMahasiswa2(){
+        return implMahasiswa.getAllMahasiswa2();
+    }
+
+    @GetMapping("getAllMahasiswa3")
+    public Response getAllMahasiswa3() { return implMahasiswa.getAllMahasiswa3();}
+
     @GetMapping("getAllJurusan")
-    public List<JurusanEntity> getAllJurusan(){
+    public Response getAllJurusan(){
         return implMahasiswa.getAllJurusan();
     }
 
     @GetMapping("getAllMatkul")
-    public List<MatkulEntity> getAllMatkul(){
+    public Response getAllMatkul(){
         return implMahasiswa.getAllMatkul();
     }
 
-    @GetMapping("getNimMahasiswa/{nim}")
-    public MahasiswaJoinDTO getNim(@PathVariable ("nim") String nim){
-        return implMahasiswa.getNim(nim);
+    @GetMapping("getMahasiswaByNim/{nim}")
+    public Response getMahasiswaByNim(@PathVariable ("nim") String nim){
+        MahasiswaDTO data = new MahasiswaDTO();
+        return implMahasiswa.getMahasiswaByNim(nim);
     }
 
-    @GetMapping("getMahasiswa/getByBody")
-    public MahasiswaJoinDTO getMahasiswaByBody (@RequestBody MahasiswaJoinDTO request){
-        return null;
+    @DeleteMapping("deleteMahasiswaByNim/{nim}")
+    public ResponseEntity<String> deleteMahasiswaByNim (@PathVariable ("nim") String nim){
+            implMahasiswa.deleteMahasiswaByNim(nim);
+            return ResponseEntity.ok().build();
     }
 }

@@ -7,24 +7,32 @@ import javax.persistence.*;
 public class MahasiswaEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_mahasiswa")
+    private Long idMahasiswa;
+
     @Column(name = "nim")
     private String nim;
 
     @Column(name = "nama_mahasiswa")
     private String namaMahasiswa;
 
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "code_jurusan", referencedColumnName = "code_jurusan")
-//    private JurusanEntity codeJurusan;
-//
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "code_matkul", referencedColumnName = "code_matkul")
+    @Column(name = "jurusan")
+    private String jurusan;
 
     @Column(name = "semester_mahasiswa")
     private Integer semesterMahasiswa;
 
     @Column(name = "active_mahasiswa")
     private Boolean activeMahasiswa;
+
+    public Long getIdMahasiswa() {
+        return idMahasiswa;
+    }
+
+    public void setIdMahasiswa(Long idMahasiswa) {
+        this.idMahasiswa = idMahasiswa;
+    }
 
     public String getNim() {
         return nim;
@@ -42,13 +50,13 @@ public class MahasiswaEntity {
         this.namaMahasiswa = namaMahasiswa;
     }
 
-//    public JurusanEntity getCodeJurusan() {
-//        return codeJurusan;
-//    }
-//
-//    public void setCodeJurusan(JurusanEntity codeJurusan) {
-//        this.codeJurusan = codeJurusan;
-//    }
+    public String getJurusan() {
+        return jurusan;
+    }
+
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
 
     public Integer getSemesterMahasiswa() {
         return semesterMahasiswa;

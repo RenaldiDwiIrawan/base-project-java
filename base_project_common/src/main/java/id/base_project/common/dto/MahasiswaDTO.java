@@ -2,9 +2,11 @@ package id.base_project.common.dto;
 
 public class MahasiswaDTO {
     String namaMahasiswa;
-    String NIM;
+    String nim;
     Integer semesterMahasiswa;
     boolean mahasiswaActive;
+    String jurusan;
+    String matkul;
 
     public String getNamaMahasiswa() {
         return namaMahasiswa;
@@ -14,12 +16,12 @@ public class MahasiswaDTO {
         this.namaMahasiswa = namaMahasiswa;
     }
 
-    public String getNIM() {
-        return NIM;
+    public String getNim() {
+        return nim;
     }
 
-    public void setNIM(String NIM) {
-        this.NIM = NIM;
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 
     public Integer getSemesterMahasiswa() {
@@ -36,5 +38,21 @@ public class MahasiswaDTO {
 
     public void setMahasiswaActive(boolean mahasiswaActive) {
         this.mahasiswaActive = mahasiswaActive;
+    }
+
+    public String getJurusan() {
+        return jurusan;
+    }
+
+    public void setJurusan(String jurusan) {
+        this.jurusan = jurusan;
+    }
+
+    public String getMatkul() {
+        return matkul;
+    }
+
+    public void setMatkul(String matkul) {
+        this.matkul = matkul;
     }
 }

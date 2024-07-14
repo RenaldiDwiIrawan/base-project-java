@@ -1,14 +1,16 @@
 package id.base_project.common.dto;
 
+
+import id.base_project.dao.entity.JurusanEntity;
+import id.base_project.dao.entity.MatkulEntity;
+
 public class MahasiswaJoinDTO {
     String namaMahasiswa;
-    String NIM;
-    String codeJurusan;
-    String namaJurusan;
-    String semesterMahasiswa;
-    String codeMatkul;
-    String namaMatkul;
-    boolean mahasiswaActive;
+    String nim;
+    Integer semesterMahasiswa;
+    boolean activeMahasiswa;
+    JurusanDTO Jurusan;
+    MatkulDTO Matkul;
 
     public String getNamaMahasiswa() {
         return namaMahasiswa;
@@ -18,59 +20,43 @@ public class MahasiswaJoinDTO {
         this.namaMahasiswa = namaMahasiswa;
     }
 
-    public String getNIM() {
-        return NIM;
+    public String getNim() {
+        return nim;
     }
 
-    public void setNIM(String NIM) {
-        this.NIM = NIM;
+    public void setNim(String nim) {
+        this.nim = nim;
     }
 
-    public String getCodeJurusan() {
-        return codeJurusan;
-    }
-
-    public void setCodeJurusan(String codeJurusan) {
-        this.codeJurusan = codeJurusan;
-    }
-
-    public String getNamaJurusan() {
-        return namaJurusan;
-    }
-
-    public void setNamaJurusan(String namaJurusan) {
-        this.namaJurusan = namaJurusan;
-    }
-
-    public String getSemesterMahasiswa() {
+    public Integer getSemesterMahasiswa() {
         return semesterMahasiswa;
     }
 
-    public void setSemesterMahasiswa(String semesterMahasiswa) {
+    public void setSemesterMahasiswa(Integer semesterMahasiswa) {
         this.semesterMahasiswa = semesterMahasiswa;
     }
 
-    public String getCodeMatkul() {
-        return codeMatkul;
+    public boolean isActiveMahasiswa() {
+        return activeMahasiswa;
     }
 
-    public void setCodeMatkul(String codeMatkul) {
-        this.codeMatkul = codeMatkul;
+    public void setActiveMahasiswa(boolean activeMahasiswa) {
+        this.activeMahasiswa = activeMahasiswa;
     }
 
-    public String getNamaMatkul() {
-        return namaMatkul;
+    public JurusanDTO getJurusan() {
+        return Jurusan;
     }
 
-    public void setNamaMatkul(String namaMatkul) {
-        this.namaMatkul = namaMatkul;
+    public void setJurusan(JurusanDTO jurusan) {
+        Jurusan = jurusan;
     }
 
-    public boolean getMahasiswaActive() {
-        return mahasiswaActive;
+    public MatkulDTO getMatkul() {
+        return Matkul;
     }
 
-    public void setMahasiswaActive(boolean mahasiswaActive) {
-        this.mahasiswaActive = mahasiswaActive;
+    public void setMatkul(MatkulDTO matkul) {
+        Matkul = matkul;
     }
 }

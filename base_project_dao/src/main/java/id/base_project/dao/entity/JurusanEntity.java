@@ -7,6 +7,10 @@ import javax.persistence.*;
 public class JurusanEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_jurusan")
+    private Long idJurusan;
+
     @Column(name = "code_jurusan", updatable = false)
     private String codeJurusan;
 
@@ -15,6 +19,14 @@ public class JurusanEntity {
 
     @Column(name = "fakultas")
     private String fakultas;
+
+    public Long getIdJurusan() {
+        return idJurusan;
+    }
+
+    public void setIdJurusan(Long idJurusan) {
+        this.idJurusan = idJurusan;
+    }
 
     public String getCodeJurusan() {
         return codeJurusan;
