@@ -122,5 +122,7 @@ This is a base project template for a Spring Boot application that includes the 
   - Consume messages from Kafka topic
 -->
 
+<!--
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+-->
