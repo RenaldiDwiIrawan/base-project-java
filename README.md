@@ -44,7 +44,7 @@ This is a base project template for a Spring Boot application that includes the 
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone (https://github.com/RenaldiDwiIrawan/base-project-java.git)
+    git clone https://github.com/RenaldiDwiIrawan/base-project-java.git
     ```
 
 2. Build the project:
