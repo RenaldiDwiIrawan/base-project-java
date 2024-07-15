@@ -6,21 +6,31 @@ import id.base_project.common.dto.MahasiswaDTO;
 import id.base_project.common.dto.MatkulDTO;
 import id.base_project.common.response.Response;
 
+import javax.transaction.Transactional;
+
 public interface IMahasiswa {
 
-    public Response addMahasiswa(MahasiswaDTO mahasiswaDTO);
-    public Response addJurusan(JurusanDTO jurusanDTO);
-    public Response addMatkul(MatkulDTO matkulDTO);
+    Response addMahasiswa(MahasiswaDTO mahasiswaDTO);
+    Response addJurusan(JurusanDTO jurusanDTO);
+    Response addMatkul(MatkulDTO matkulDTO);
 
-    public Response getAllJurusan();
-    public Response getAllMatkul();
+    Response getAllJurusan();
+    Response getAllMatkul();
 
-    public Response getAllMahasiswa();
-    public Response getAllMahasiswa2();
-    public Response getAllMahasiswa3();
+    Response getAllMahasiswa();
+    Response getAllMahasiswa2();
+    Response getAllMahasiswa3();
 
-    public Response getMahasiswaByNim(String request);
+    Response getMahasiswaByNim(String request);
+    Response getJurusanByNamaJurusan(String namaJurusan);
+    Response getMatkulByNamaMatkul(String namaMatkul);
 
-    public void deleteMahasiswaByNim (String nim);
 
+    @Transactional
+    Response deleteMahasiswaById(Long id);
+
+    @Transactional
+    Response deleteJurusanById(Long id);
+    @Transactional
+    Response deleteMatkulById(Long id);
 }

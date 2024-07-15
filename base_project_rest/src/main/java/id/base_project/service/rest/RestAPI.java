@@ -62,13 +62,31 @@ public class RestAPI  {
 
     @GetMapping("getMahasiswaByNim/{nim}")
     public Response getMahasiswaByNim(@PathVariable ("nim") String nim){
-        MahasiswaDTO data = new MahasiswaDTO();
         return implMahasiswa.getMahasiswaByNim(nim);
     }
 
-    @DeleteMapping("deleteMahasiswaByNim/{nim}")
-    public ResponseEntity<String> deleteMahasiswaByNim (@PathVariable ("nim") String nim){
-            implMahasiswa.deleteMahasiswaByNim(nim);
-            return ResponseEntity.ok().build();
+    @GetMapping("getJurusanByNamaJurusan/{namaJurusan}")
+    public Response getJurusanByNamaJurusan (@PathVariable ("namaJurusan") String namaJurusan){
+        return implMahasiswa.getJurusanByNamaJurusan(namaJurusan);
+    }
+
+    @GetMapping("getMatkulByNamaMatkul/{namaMatkul}")
+    public Response getMatkulByNamaMatkul (@PathVariable ("namaMatkul") String namaMatkul){
+        return implMahasiswa.getMatkulByNamaMatkul(namaMatkul);
+    }
+
+    @DeleteMapping("deleteMahasiswaById/{id}")
+    public Response deleteMahasiswaById (@PathVariable ("id") Long id){
+        return  implMahasiswa.deleteMahasiswaById(id);
+    }
+
+    @DeleteMapping("deleteJurusanById/{id}")
+    public Response deleteJurusanById (@PathVariable ("id") Long id){
+        return  implMahasiswa.deleteJurusanById(id);
+    }
+
+    @DeleteMapping("deleteMatkulById/{id}")
+    public Response deleteMatkulById (@PathVariable ("id") Long id){
+        return  implMahasiswa.deleteMatkulById(id);
     }
 }

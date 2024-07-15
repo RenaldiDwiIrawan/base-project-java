@@ -26,7 +26,7 @@ public class Response<T> {
         this.pesan = pesan;
     }
 
-    public HttpStatus getStatus() {
+    public HttpStatus getStatus(HttpStatus ok) {
         return status;
     }
 

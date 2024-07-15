@@ -4,7 +4,6 @@ import id.base_project.common.dto.JurusanDTO;
 import id.base_project.common.dto.MahasiswaDTO;
 import id.base_project.common.dto.MahasiswaJoinDTO;
 import id.base_project.common.dto.MatkulDTO;
-import id.base_project.common.exception.FailedException;
 import id.base_project.common.response.Response;
 import id.base_project.dao.entity.JurusanEntity;
 import id.base_project.dao.entity.MahasiswaEntity;
@@ -17,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,7 +33,14 @@ public class CrudAPI implements IMahasiswa {
     @Autowired
     private MatkulRepo matkulRepo;
 
+    static final String SUCCESS_ADD_MAHASISWA = " Add Mahasiswa Success";
+    static final String SUCCESS_ADD_JURUSAN = " Add Jurusan Success";
+    static final String SUCCESS_ADD_MATKUL = " Add Matkul Success";
+    static final String SUCCESS = " Success";
+    static final String DELETE_SUCCESS = " Delete Success";
+    static final String DELETE_NOT_SUCCESS = "Delete Not Success";
     private Response response = new Response();
+
 
     @Override
     public Response addMahasiswa(MahasiswaDTO request) {
@@ -55,7 +60,7 @@ public class CrudAPI implements IMahasiswa {
         filled.setMatkul(mapperCodeMatkul(codeMatkul));
 
         response.setData(filled);
-        response.setPesan("Add Mahasiswa Success");
+        response.setPesan(SUCCESS_ADD_MAHASISWA);
         response.setStatus(HttpStatus.OK);
 
         return response;
@@ -64,7 +69,7 @@ public class CrudAPI implements IMahasiswa {
     @Override
     public Response addJurusan(JurusanDTO request) {
         response.setData(mapperJurusan(request));
-        response.setPesan("Add Jurusan Success");
+        response.setPesan(SUCCESS_ADD_JURUSAN);
         response.setStatus(HttpStatus.OK);
         return response;
     }
@@ -72,7 +77,7 @@ public class CrudAPI implements IMahasiswa {
     @Override
     public Response addMatkul(MatkulDTO request) {
         response.setData(mapperMatkul(request));
-        response.setPesan("Add Matkul Success");
+        response.setPesan(SUCCESS_ADD_MATKUL);
         response.setStatus(HttpStatus.OK);
         return response;
     }
@@ -80,7 +85,7 @@ public class CrudAPI implements IMahasiswa {
     @Override
     public Response getAllMahasiswa() {
         response.setData(mahasiswaRepo.findAll());
-        response.setPesan("Success");
+        response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
         return response;
     }
@@ -88,7 +93,7 @@ public class CrudAPI implements IMahasiswa {
     @Override
     public Response getAllJurusan() {
         response.setData(jurusanRepo.findAll());
-        response.setPesan("Success");
+        response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
         return response;
     }
@@ -96,7 +101,7 @@ public class CrudAPI implements IMahasiswa {
     @Override
     public Response getAllMatkul() {
         response.setData(matkulRepo.findAll());
-        response.setPesan("Success");
+        response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
         return response;
     }
@@ -108,7 +113,7 @@ public class CrudAPI implements IMahasiswa {
         List<MahasiswaDTO> mahasiswaDTOList = mahasiswaEntities.stream().map(this::from).collect(Collectors.toList());
 
         response.setData(mahasiswaDTOList);
-        response.setPesan("Success");
+        response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
         return response;
     }
@@ -142,7 +147,7 @@ public class CrudAPI implements IMahasiswa {
         }).collect(Collectors.toList());
 
         response.setData(mahasiswaDTOList);
-        response.setPesan("Success");
+        response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
         return response;
     }
@@ -150,22 +155,82 @@ public class CrudAPI implements IMahasiswa {
     @Override
     public Response getMahasiswaByNim(String request) {
         Optional<MahasiswaEntity> getNim = mahasiswaRepo.findByNim(request);
-
         response.setData(getNim);
-        response.setPesan("Success");
+        response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
         return response;
     }
 
     @Override
-    @Transactional
-    public void deleteMahasiswaByNim(String nim) {
-        Optional<MahasiswaEntity> getNim = mahasiswaRepo.findByNim(nim);
-        if (getNim.isPresent()){
-            System.out.println("Nim " + nim + " akan di hapus");
-            mahasiswaRepo.deleteByNim(nim);
+    public Response getJurusanByNamaJurusan(String namaJurusan) {
+        Optional<JurusanEntity> getNamaJurusan = jurusanRepo.findByNamaJurusan(namaJurusan);
+        response.setData(getNamaJurusan);
+        response.setPesan(SUCCESS);
+        response.setStatus(HttpStatus.OK);
+        return response;
+    }
+
+    @Override
+    public Response getMatkulByNamaMatkul(String namaMatkul) {
+        Optional<MatkulEntity> getNamaMatkul = matkulRepo.findByNamaMatkul(namaMatkul);
+        response.setData(getNamaMatkul);
+        response.setPesan(SUCCESS);
+        response.setStatus(HttpStatus.OK);
+        return response;
+    }
+
+    @Override
+    public Response deleteMahasiswaById(Long id) {
+        Optional<MahasiswaEntity> getNim = mahasiswaRepo.findById(id);
+
+        if (!getNim.isPresent()) {
+            response.setData(id);
+            response.setPesan("Nim " + id + DELETE_NOT_SUCCESS);
+            response.setStatus(HttpStatus.NOT_FOUND);
+            return response;
         } else {
-            throw new FailedException("Nim : " +nim+" Tidak ada");
+            mahasiswaRepo.deleteById(id);
+            response.setData(getNim);
+            response.setPesan("Nim " + id + DELETE_SUCCESS);
+            response.setStatus(HttpStatus.OK);
+            return response;
+        }
+    }
+
+
+    @Override
+    public Response deleteJurusanById(Long id) {
+        Optional<JurusanEntity> getJurusan = jurusanRepo.findById(id);
+
+        if (!getJurusan.isPresent()) {
+            response.setData(id);
+            response.setPesan("ID " + id + " Tidak tersedia");
+            response.setStatus(HttpStatus.NOT_FOUND);
+            return response;
+        } else {
+            jurusanRepo.deleteById(id);
+            response.setData(getJurusan);
+            response.setPesan("ID " + id + " Berhasil di hapus");
+            response.setStatus(HttpStatus.OK);
+            return response;
+        }
+    }
+
+    @Override
+    public Response deleteMatkulById(Long id) {
+        Optional<MatkulEntity> getMatkul = matkulRepo.findById(id);
+
+        if (!getMatkul.isPresent()) {
+            response.setData(id);
+            response.setPesan("ID " + id + " Tidak tersedia");
+            response.setStatus(HttpStatus.NOT_FOUND);
+            return response;
+        } else {
+            matkulRepo.deleteById(id);
+            response.setData(getMatkul);
+            response.setPesan("ID " + id + " Berhasil di hapus");
+            response.setStatus(HttpStatus.OK);
+            return response;
         }
     }
 

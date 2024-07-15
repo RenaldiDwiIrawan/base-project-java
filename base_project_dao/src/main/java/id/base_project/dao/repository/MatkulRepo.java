@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface MatkulRepo extends JpaRepository<MatkulEntity, Long> {
     Optional<MatkulEntity> findByCodeMatkul(String codeMatkul);
+    Optional<MatkulEntity> findByNamaMatkul(String namaMatkul);
 }

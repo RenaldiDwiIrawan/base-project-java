@@ -8,6 +8,8 @@ import java.util.Optional;
 
 
 @Repository
-public interface JurusanRepo extends JpaRepository<JurusanEntity, String> {
+public interface JurusanRepo extends JpaRepository<JurusanEntity, Long> {
     Optional<JurusanEntity> findByCodeJurusan(String codeJurusan);
+
+    Optional<JurusanEntity> findByNamaJurusan(String namaJurusan);
 }
