@@ -64,6 +64,11 @@ This is a base project template for a Spring Boot application that includes the 
     mvn spring-boot:run
     ```
 
+## API Documentation
+
+- **Postman Collection**: [Download Here](https://drive.google.com/file/d/1_6c7tpL89bXEgSiKIT7qYjhsZ7KQOxE5/view?usp=sharing)
+- **Swagger UI**: [Swagger Documentation](https://drive.google.com/file/d/1_6c7tpL89bXEgSiKIT7qYjhsZ7KQOxE5/view?usp=sharing)
+
 ## Features
 
 ### CRUD Operations
