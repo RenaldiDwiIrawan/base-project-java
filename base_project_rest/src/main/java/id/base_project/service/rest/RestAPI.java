@@ -1,18 +1,19 @@
 package id.base_project.service.rest;
 
-
 import id.base_project.common.dto.JurusanDTO;
 import id.base_project.common.dto.MahasiswaDTO;
 import id.base_project.common.dto.MatkulDTO;
 import id.base_project.common.response.Response;
 import id.base_project.dao.entity.MahasiswaEntity;
 import id.base_project.service.impl.IMahasiswa;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("base-project/")
+@Api(value = "Controller-Kampus", tags = {"Kampus"})
 public class RestAPI  {
 
     @Autowired
