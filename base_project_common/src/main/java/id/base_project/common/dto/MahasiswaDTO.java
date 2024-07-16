@@ -6,7 +6,6 @@ public class MahasiswaDTO {
     Integer semesterMahasiswa;
     boolean mahasiswaActive;
     String jurusan;
-    String matkul;
 
     public String getNamaMahasiswa() {
         return namaMahasiswa;
@@ -48,11 +47,4 @@ public class MahasiswaDTO {
         this.jurusan = jurusan;
     }
 
-    public String getMatkul() {
-        return matkul;
-    }
-
-    public void setMatkul(String matkul) {
-        this.matkul = matkul;
-    }
 }

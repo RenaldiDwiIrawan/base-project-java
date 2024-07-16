@@ -5,6 +5,7 @@ import id.base_project.common.dto.JurusanDTO;
 import id.base_project.common.dto.MahasiswaDTO;
 import id.base_project.common.dto.MatkulDTO;
 import id.base_project.common.response.Response;
+import id.base_project.dao.entity.MahasiswaEntity;
 import id.base_project.service.impl.IMahasiswa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,17 +24,17 @@ public class RestAPI  {
     }
 
     @PostMapping("addMahasiswa")
-    public Response tambahMahasiswa(@RequestBody MahasiswaDTO request){
+    public Response addMahasiswa(@RequestBody MahasiswaDTO request){
         return implMahasiswa.addMahasiswa(request);
     }
 
     @PostMapping("addJurusan")
-    public Response tambahJurusan(@RequestBody JurusanDTO request){
+    public Response addJurusan(@RequestBody JurusanDTO request){
         return implMahasiswa.addJurusan(request);
     }
 
     @PostMapping("addMatkul")
-    public Response tambahMatkul(@RequestBody MatkulDTO request){
+    public Response addMatkul(@RequestBody MatkulDTO request){
         return implMahasiswa.addMatkul(request);
     }
 
@@ -73,6 +74,21 @@ public class RestAPI  {
     @GetMapping("getMatkulByNamaMatkul/{namaMatkul}")
     public Response getMatkulByNamaMatkul (@PathVariable ("namaMatkul") String namaMatkul){
         return implMahasiswa.getMatkulByNamaMatkul(namaMatkul);
+    }
+
+    @PutMapping("updateMahasiswaById/{idMahasiswa}")
+    public Response updateMahasiswaById (@RequestBody MahasiswaDTO request, @PathVariable ("idMahasiswa") Long idMahasiswa){
+        return implMahasiswa.updateMahasiswaById(request, idMahasiswa);
+    }
+
+    @PutMapping("updateJurusanById/{idJurusan}")
+    public Response updateJurusanById(@RequestBody JurusanDTO request, @PathVariable ("idJurusan") Long idJurusan){
+        return implMahasiswa.updateJurusanById(request, idJurusan);
+    }
+
+    @PutMapping("updateMatkulById/{idMatkul}")
+    public Response updateMatkulById(@RequestBody MatkulDTO request, @PathVariable ("idMatkul") Long idMatkul){
+        return implMahasiswa.updateMatkulById(request, idMatkul);
     }
 
     @DeleteMapping("deleteMahasiswaById/{id}")

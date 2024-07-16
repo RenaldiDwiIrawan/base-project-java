@@ -4,6 +4,7 @@ import id.base_project.common.dto.JurusanDTO;
 import id.base_project.common.dto.MahasiswaDTO;
 import id.base_project.common.dto.MahasiswaJoinDTO;
 import id.base_project.common.dto.MatkulDTO;
+import id.base_project.common.exception.FailedException;
 import id.base_project.common.response.Response;
 import id.base_project.dao.entity.JurusanEntity;
 import id.base_project.dao.entity.MahasiswaEntity;
@@ -33,12 +34,17 @@ public class CrudAPI implements IMahasiswa {
     @Autowired
     private MatkulRepo matkulRepo;
 
-    static final String SUCCESS_ADD_MAHASISWA = " Add Mahasiswa Success";
-    static final String SUCCESS_ADD_JURUSAN = " Add Jurusan Success";
-    static final String SUCCESS_ADD_MATKUL = " Add Matkul Success";
-    static final String SUCCESS = " Success";
-    static final String DELETE_SUCCESS = " Delete Success";
-    static final String DELETE_NOT_SUCCESS = "Delete Not Success";
+    private static final String SUCCESS_ADD_MAHASISWA = " Add Mahasiswa Success";
+    private static final String SUCCESS_ADD_JURUSAN = " Add Jurusan Success";
+    private static final String SUCCESS_ADD_MATKUL = " Add Matkul Success";
+    private static final String SUCCESS = " Success";
+    private static final String SUCCESS_UPDATE_MAHASISWA = " Update Mahasiswa Success";
+    private static final String SUCCESS_UPDATE_JURUSAN = " Update Jurusan Success";
+    private static final String SUCCESS_UPDATE_MATKUL = " Update Matkul Success";
+    private static final String DELETE_SUCCESS = " Delete Success";
+    private static final String DELETE_NOT_SUCCESS = "Delete Not Success";
+    private static final String ID_NOT_FOUND = "ID NOT FOUND";
+
     private Response response = new Response();
 
 
@@ -46,10 +52,10 @@ public class CrudAPI implements IMahasiswa {
     public Response addMahasiswa(MahasiswaDTO request) {
         MahasiswaJoinDTO filled = new MahasiswaJoinDTO();
         String codeJurusan = request.getJurusan();
-        String codeMatkul = request.getMatkul();
+//        String codeMatkul = request.getMatkul();
 
         mapperCodeJurusan(codeJurusan);
-        mapperCodeMatkul(codeMatkul);
+//        mapperCodeMatkul(codeMatkul);
         mapperMahasiswa(request);
 
         filled.setNim(mapperMahasiswa(request).getNim());
@@ -57,7 +63,7 @@ public class CrudAPI implements IMahasiswa {
         filled.setSemesterMahasiswa(mapperMahasiswa(request).getSemesterMahasiswa());
         filled.setActiveMahasiswa(mapperMahasiswa(request).getActiveMahasiswa());
         filled.setJurusan(mapperCodeJurusan(codeJurusan));
-        filled.setMatkul(mapperCodeMatkul(codeMatkul));
+//        filled.setMatkul(mapperCodeMatkul(codeMatkul));
 
         response.setData(filled);
         response.setPesan(SUCCESS_ADD_MAHASISWA);
@@ -180,6 +186,45 @@ public class CrudAPI implements IMahasiswa {
     }
 
     @Override
+    public Response updateMahasiswaById(MahasiswaDTO request, Long idMahasiswa) {
+        Optional<MahasiswaEntity> getIdMahasiswa = mahasiswaRepo.findById(idMahasiswa);
+
+        if (!getIdMahasiswa.isPresent()){
+            throw new FailedException(ID_NOT_FOUND);
+        }
+        response.setData(mapperUpdateMahasiswa(request, getIdMahasiswa));
+        response.setPesan(SUCCESS_UPDATE_MAHASISWA);
+        response.setStatus(HttpStatus.OK);
+        return response;
+    }
+
+    @Override
+    public Response updateJurusanById(JurusanDTO request, Long idJurusan) {
+        Optional<JurusanEntity> getIdJurusan = jurusanRepo.findById(idJurusan);
+
+        if (!getIdJurusan.isPresent()){
+            throw new FailedException(ID_NOT_FOUND);
+        }
+        response.setData(mapperUpdateJurusan(request,getIdJurusan));
+        response.setPesan(SUCCESS);
+        response.setStatus(HttpStatus.OK);
+        return response;
+    }
+
+    @Override
+    public Response updateMatkulById(MatkulDTO request, Long idMatkul) {
+        Optional<MatkulEntity> getIdMatkul = matkulRepo.findById(idMatkul);
+
+        if (!getIdMatkul.isPresent()){
+            throw new FailedException(ID_NOT_FOUND);
+        }
+        response.setData(mapperUpdateMatkul(request, getIdMatkul));
+        response.setPesan(SUCCESS);
+        response.setStatus(HttpStatus.OK);
+        return response;
+    }
+
+    @Override
     public Response deleteMahasiswaById(Long id) {
         Optional<MahasiswaEntity> getNim = mahasiswaRepo.findById(id);
 
@@ -288,6 +333,37 @@ public class CrudAPI implements IMahasiswa {
         matkulEntity = matkulRepo.save(matkulEntity);
 
         return matkulEntity;
+    }
+
+    private MahasiswaEntity mapperUpdateMahasiswa(MahasiswaDTO request, Optional<MahasiswaEntity> getIdMahasiswa) {
+        MahasiswaEntity mahasiswa = getIdMahasiswa.get();
+        mahasiswa.setNim(request.getNim());
+        mahasiswa.setNamaMahasiswa(request.getNamaMahasiswa());
+        mahasiswa.setSemesterMahasiswa(request.getSemesterMahasiswa());
+        mahasiswa.setActiveMahasiswa(request.isMahasiswaActive());
+        mahasiswa.setJurusan(request.getJurusan());
+        mahasiswa = mahasiswaRepo.save(mahasiswa);
+
+        return mahasiswa;
+    }
+
+    private JurusanEntity mapperUpdateJurusan(JurusanDTO request, Optional<JurusanEntity> getIdJurusan) {
+        JurusanEntity jurusan = getIdJurusan.get();
+        jurusan.setCodeJurusan(request.getCodeJurusan());
+        jurusan.setNamaJurusan(request.getNamaJurusan());
+        jurusan.setFakultas(request.getFakultas());
+        jurusan = jurusanRepo.save(jurusan);
+        return jurusan;
+    }
+
+    private MatkulEntity mapperUpdateMatkul(MatkulDTO request, Optional<MatkulEntity> getIdMatkul) {
+        MatkulEntity matkul = getIdMatkul.get();
+        matkul.setCodeMatkul(request.getCodeMatkul());
+        matkul.setNamaMatkul(request.getNamaMatkul());
+        matkul.setSemesterMatkul(request.getSemesterMatkul());
+        matkul.setSksMatkul(request.getSksMatkul());
+        matkul = matkulRepo.save(matkul);
+        return matkul;
     }
 
 }

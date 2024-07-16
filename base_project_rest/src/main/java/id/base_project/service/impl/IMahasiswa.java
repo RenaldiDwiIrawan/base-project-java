@@ -25,10 +25,12 @@ public interface IMahasiswa {
     Response getJurusanByNamaJurusan(String namaJurusan);
     Response getMatkulByNamaMatkul(String namaMatkul);
 
+    Response updateMahasiswaById(MahasiswaDTO request, Long idMahasiswa);
+    Response updateJurusanById(JurusanDTO request, Long idJurusan);
+    Response updateMatkulById(MatkulDTO request, Long idMatkul);
 
     @Transactional
     Response deleteMahasiswaById(Long id);
-
     @Transactional
     Response deleteJurusanById(Long id);
     @Transactional
