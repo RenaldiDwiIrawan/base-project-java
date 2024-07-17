@@ -12,6 +12,8 @@ import id.base_project.dao.entity.MatkulEntity;
 import id.base_project.dao.repository.JurusanRepo;
 import id.base_project.dao.repository.MahasiswaRepo;
 import id.base_project.dao.repository.MatkulRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -34,6 +36,8 @@ public class CrudAPI implements IMahasiswa {
     @Autowired
     private MatkulRepo matkulRepo;
 
+    Logger log = LoggerFactory.getLogger(CrudAPI.class);
+
     private static final String SUCCESS_ADD_MAHASISWA = " Add Mahasiswa Success";
     private static final String SUCCESS_ADD_JURUSAN = " Add Jurusan Success";
     private static final String SUCCESS_ADD_MATKUL = " Add Matkul Success";
@@ -52,10 +56,8 @@ public class CrudAPI implements IMahasiswa {
     public Response addMahasiswa(MahasiswaDTO request) {
         MahasiswaJoinDTO filled = new MahasiswaJoinDTO();
         String codeJurusan = request.getJurusan();
-//        String codeMatkul = request.getMatkul();
 
         mapperCodeJurusan(codeJurusan);
-//        mapperCodeMatkul(codeMatkul);
         mapperMahasiswa(request);
 
         filled.setNim(mapperMahasiswa(request).getNim());
@@ -63,7 +65,6 @@ public class CrudAPI implements IMahasiswa {
         filled.setSemesterMahasiswa(mapperMahasiswa(request).getSemesterMahasiswa());
         filled.setActiveMahasiswa(mapperMahasiswa(request).getActiveMahasiswa());
         filled.setJurusan(mapperCodeJurusan(codeJurusan));
-//        filled.setMatkul(mapperCodeMatkul(codeMatkul));
 
         response.setData(filled);
         response.setPesan(SUCCESS_ADD_MAHASISWA);
@@ -93,6 +94,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(mahasiswaRepo.findAll());
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get all mahasiswa success");
         return response;
     }
 
@@ -101,6 +103,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(jurusanRepo.findAll());
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get all jurusan success");
         return response;
     }
 
@@ -109,6 +112,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(matkulRepo.findAll());
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get all matkkul success");
         return response;
     }
 
@@ -121,6 +125,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(mahasiswaDTOList);
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get all mahasiswa with java double collon success");
         return response;
     }
 
@@ -155,6 +160,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(mahasiswaDTOList);
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get all mahasiswa with java stream map success");
         return response;
     }
 
@@ -164,6 +170,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(getNim);
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get mahasiswa by nim " + request);
         return response;
     }
 
@@ -173,6 +180,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(getNamaJurusan);
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get jurusan by nama " + namaJurusan);
         return response;
     }
 
@@ -182,6 +190,7 @@ public class CrudAPI implements IMahasiswa {
         response.setData(getNamaMatkul);
         response.setPesan(SUCCESS);
         response.setStatus(HttpStatus.OK);
+        log.info("get matkul by nama " + namaMatkul);
         return response;
     }
 
@@ -190,8 +199,10 @@ public class CrudAPI implements IMahasiswa {
         Optional<MahasiswaEntity> getIdMahasiswa = mahasiswaRepo.findById(idMahasiswa);
 
         if (!getIdMahasiswa.isPresent()){
+            log.info("update mahasiswa by id failed");
             throw new FailedException(ID_NOT_FOUND);
         }
+
         response.setData(mapperUpdateMahasiswa(request, getIdMahasiswa));
         response.setPesan(SUCCESS_UPDATE_MAHASISWA);
         response.setStatus(HttpStatus.OK);
@@ -203,6 +214,7 @@ public class CrudAPI implements IMahasiswa {
         Optional<JurusanEntity> getIdJurusan = jurusanRepo.findById(idJurusan);
 
         if (!getIdJurusan.isPresent()){
+            log.info("update jurusan by id failed" + idJurusan);
             throw new FailedException(ID_NOT_FOUND);
         }
         response.setData(mapperUpdateJurusan(request,getIdJurusan));
@@ -216,6 +228,7 @@ public class CrudAPI implements IMahasiswa {
         Optional<MatkulEntity> getIdMatkul = matkulRepo.findById(idMatkul);
 
         if (!getIdMatkul.isPresent()){
+            log.error("update matkul by id failed" + idMatkul);
             throw new FailedException(ID_NOT_FOUND);
         }
         response.setData(mapperUpdateMatkul(request, getIdMatkul));
@@ -232,12 +245,14 @@ public class CrudAPI implements IMahasiswa {
             response.setData(id);
             response.setPesan("Nim " + id + DELETE_NOT_SUCCESS);
             response.setStatus(HttpStatus.NOT_FOUND);
+            log.error("delete mahasiswa by id failed " + id);
             return response;
         } else {
             mahasiswaRepo.deleteById(id);
             response.setData(getNim);
             response.setPesan("Nim " + id + DELETE_SUCCESS);
             response.setStatus(HttpStatus.OK);
+            log.info("delete mahasiswa by id success" + id);
             return response;
         }
     }
@@ -251,12 +266,14 @@ public class CrudAPI implements IMahasiswa {
             response.setData(id);
             response.setPesan("ID " + id + " Tidak tersedia");
             response.setStatus(HttpStatus.NOT_FOUND);
+            log.info("delete jurusan by id failed " + id);
             return response;
         } else {
             jurusanRepo.deleteById(id);
             response.setData(getJurusan);
             response.setPesan("ID " + id + " Berhasil di hapus");
             response.setStatus(HttpStatus.OK);
+            log.info("delete jurusan success" + id);
             return response;
         }
     }
@@ -269,27 +286,18 @@ public class CrudAPI implements IMahasiswa {
             response.setData(id);
             response.setPesan("ID " + id + " Tidak tersedia");
             response.setStatus(HttpStatus.NOT_FOUND);
+            log.error("delete matkul by id failed " + id);
             return response;
         } else {
             matkulRepo.deleteById(id);
             response.setData(getMatkul);
             response.setPesan("ID " + id + " Berhasil di hapus");
             response.setStatus(HttpStatus.OK);
+            log.info("delete matkul by id success" + id);
             return response;
         }
     }
 
-    private MatkulDTO mapperCodeMatkul(String codeMatkul) {
-        Optional<MatkulEntity> getMatkulEntity = matkulRepo.findByCodeMatkul(codeMatkul);
-        MatkulDTO matkulDTO = new MatkulDTO();
-        if (getMatkulEntity.isPresent()){
-            matkulDTO.setCodeMatkul(getMatkulEntity.get().getCodeMatkul());
-            matkulDTO.setNamaMatkul(getMatkulEntity.get().getNamaMatkul());
-            matkulDTO.setSemesterMatkul(getMatkulEntity.get().getSemesterMatkul());
-            matkulDTO.setSksMatkul(getMatkulEntity.get().getSksMatkul());
-        }
-        return matkulDTO;
-    }
 
     private JurusanDTO mapperCodeJurusan(String codeJurusan) {
         Optional<JurusanEntity> getJurusanEntity = jurusanRepo.findByCodeJurusan(codeJurusan);
@@ -298,6 +306,7 @@ public class CrudAPI implements IMahasiswa {
             jurusanDTO.setCodeJurusan(getJurusanEntity.get().getCodeJurusan());
             jurusanDTO.setNamaJurusan(getJurusanEntity.get().getNamaJurusan());
             jurusanDTO.setFakultas(getJurusanEntity.get().getFakultas());
+            log.info("mapper jurusan to mahasiswa");
         }
         return jurusanDTO;
     }
@@ -310,6 +319,7 @@ public class CrudAPI implements IMahasiswa {
         mahasiswaEntity.setActiveMahasiswa(request.isMahasiswaActive());
         mahasiswaEntity.setJurusan(request.getJurusan());
         mahasiswaEntity = mahasiswaRepo.save(mahasiswaEntity);
+        log.info("mahasiswa save success");
         return mahasiswaEntity;
     }
 
@@ -320,6 +330,7 @@ public class CrudAPI implements IMahasiswa {
         jurusanEntity.setNamaJurusan(request.getNamaJurusan());
         jurusanEntity.setFakultas(request.getFakultas());
         jurusanEntity = jurusanRepo.save(jurusanEntity);
+        log.info("jurusan save success");
         return jurusanEntity;
     }
 
@@ -331,7 +342,7 @@ public class CrudAPI implements IMahasiswa {
         matkulEntity.setSksMatkul(request.getSksMatkul());
         matkulEntity.setSemesterMatkul(request.getSemesterMatkul());
         matkulEntity = matkulRepo.save(matkulEntity);
-
+        log.info("matkul save success");
         return matkulEntity;
     }
 
@@ -343,7 +354,7 @@ public class CrudAPI implements IMahasiswa {
         mahasiswa.setActiveMahasiswa(request.isMahasiswaActive());
         mahasiswa.setJurusan(request.getJurusan());
         mahasiswa = mahasiswaRepo.save(mahasiswa);
-
+        log.info("mahasiswa update success");
         return mahasiswa;
     }
 
@@ -353,6 +364,7 @@ public class CrudAPI implements IMahasiswa {
         jurusan.setNamaJurusan(request.getNamaJurusan());
         jurusan.setFakultas(request.getFakultas());
         jurusan = jurusanRepo.save(jurusan);
+        log.info("jurusan update success");
         return jurusan;
     }
 
@@ -363,6 +375,7 @@ public class CrudAPI implements IMahasiswa {
         matkul.setSemesterMatkul(request.getSemesterMatkul());
         matkul.setSksMatkul(request.getSksMatkul());
         matkul = matkulRepo.save(matkul);
+        log.info("matkul update success");
         return matkul;
     }
 
