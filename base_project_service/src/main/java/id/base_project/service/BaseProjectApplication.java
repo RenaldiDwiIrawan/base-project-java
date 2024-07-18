@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan({"id.base_project"})
 @EntityScan({"id.base_project.dao.entity"})
 @EnableJpaRepositories(basePackages = {"id.base_project.dao.repository"})
+
 public class BaseProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(BaseProjectApplication.class);

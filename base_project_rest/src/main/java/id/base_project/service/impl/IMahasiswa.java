@@ -35,4 +35,12 @@ public interface IMahasiswa {
     Response deleteJurusanById(Long id);
     @Transactional
     Response deleteMatkulById(Long id);
+
+    Response getQueryNativeMahasiswa(String namaMahasiswa, Integer semesterMahasiswa);
+
+    Response getQueryNativeSemesterMahasiswa(Integer semesterMahasiswa);
+
+    Response getQueryNativeMahasiswaJurusan(String jurusan, String codeJurusan);
+
+    Response getQueryNativeMahasiswaMatkul(Integer semesterMahasiswa, Integer semesterMatkul);
 }

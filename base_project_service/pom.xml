@@ -17,6 +17,12 @@
             <artifactId>base_project_rest</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>id.base_project_renaldi</groupId>
+            <artifactId>base_project_dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <properties>

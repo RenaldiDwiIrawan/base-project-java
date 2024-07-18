@@ -1,11 +1,7 @@
 package id.base_project.common.dto;
 
 
-import id.base_project.dao.entity.JurusanEntity;
-import id.base_project.dao.entity.MatkulEntity;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
 public class MahasiswaJoinDTO {

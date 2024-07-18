@@ -4,13 +4,11 @@ import id.base_project.common.dto.JurusanDTO;
 import id.base_project.common.dto.MahasiswaDTO;
 import id.base_project.common.dto.MatkulDTO;
 import id.base_project.common.response.Response;
-import id.base_project.dao.entity.MahasiswaEntity;
 import id.base_project.service.impl.IMahasiswa;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -125,5 +123,25 @@ public class RestAPI  {
     @DeleteMapping("deleteMatkulById/{id}")
     public Response deleteMatkulById (@PathVariable ("id") Long id){
         return  implMahasiswa.deleteMatkulById(id);
+    }
+
+    @GetMapping("getQueryNativeMahasiswa")
+    public Response getQueryNativeMahasiswa (@RequestParam String namaMahasiswa, @RequestParam Integer semesterMahasiswa){
+        return implMahasiswa.getQueryNativeMahasiswa(namaMahasiswa, semesterMahasiswa);
+    }
+
+    @GetMapping("getQueryNativeSemesterMahasiswa")
+    public Response getQueryNativeSemesterMahasiswa (@RequestParam Integer semesterMahasiswa){
+        return implMahasiswa.getQueryNativeSemesterMahasiswa(semesterMahasiswa);
+    }
+
+    @GetMapping("getQueryNativeMahasiswaJurusan")
+    public Response getQueryNativeMahasiswaJurusan(@RequestParam String jurusan, @RequestParam String codeJurusan){
+        return implMahasiswa.getQueryNativeMahasiswaJurusan(jurusan, codeJurusan);
+    }
+
+    @GetMapping("getQueryNativeMahasiswaMatkul")
+    public Response getQueryNativeMahasiswaMatkul(@RequestParam Integer semesterMahasiswa, @RequestParam Integer semesterMatkul){
+        return implMahasiswa.getQueryNativeMahasiswaMatkul(semesterMahasiswa, semesterMatkul);
     }
 }

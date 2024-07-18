@@ -1,9 +1,6 @@
 package id.base_project.service.impl;
 
-import id.base_project.common.dto.JurusanDTO;
-import id.base_project.common.dto.MahasiswaDTO;
-import id.base_project.common.dto.MahasiswaJoinDTO;
-import id.base_project.common.dto.MatkulDTO;
+import id.base_project.common.dto.*;
 import id.base_project.common.exception.FailedException;
 import id.base_project.common.response.Response;
 import id.base_project.dao.entity.JurusanEntity;
@@ -296,6 +293,67 @@ public class CrudAPI implements IMahasiswa {
             log.info("delete matkul by id success" + id);
             return response;
         }
+    }
+
+    @Override
+    public Response getQueryNativeMahasiswa(String namaMahasiswa, Integer semesterMahasiswa) {
+        try{
+            List<MahasiswaEntity> data = mahasiswaRepo.findNamaAndSemester(namaMahasiswa, semesterMahasiswa);
+            log.info("native query mahasiswa nama dan semester");
+            response.setData(data);
+            response.setPesan(SUCCESS);
+            response.setStatus(HttpStatus.OK);
+        } catch (FailedException fe){
+            response.setData("");
+            response.setPesan(fe.getMessage() + "gagal find mahasiswa");
+            response.setStatus(HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
+
+    @Override
+    public Response getQueryNativeSemesterMahasiswa(Integer semesterMahasiswa) {
+        try{
+            List<MahasiswaEntity> data = mahasiswaRepo.findSemester(semesterMahasiswa);
+            response.setData(data);
+            response.setPesan(SUCCESS);
+            response.setStatus(HttpStatus.OK);
+        } catch (FailedException fe){
+            response.setData("");
+            response.setPesan(fe.getMessage() + "gagal find semester");
+            response.setStatus(HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
+
+    @Override
+    public Response getQueryNativeMahasiswaJurusan(String jurusan, String codeJurusan) {
+        try{
+            List<MahasiswaEntity> data = mahasiswaRepo.findJoinNamaMahasiswaAndJurusan(jurusan, codeJurusan);
+            response.setData(data);
+            response.setPesan(SUCCESS);
+            response.setStatus(HttpStatus.OK);
+        } catch (FailedException fe){
+            response.setData("");
+            response.setPesan(fe.getMessage() + "gagal find mahasiswa join jurusan");
+            response.setStatus(HttpStatus.BAD_REQUEST);
+        }
+        return response;
+    }
+
+    @Override
+    public Response getQueryNativeMahasiswaMatkul(Integer semesterMahasiswa, Integer semesterMatkul) {
+        try{
+            List<MahasiswaEntity> data = mahasiswaRepo.findJoinNamaMahasiswaAndMatkul(semesterMahasiswa, semesterMatkul);
+            response.setData(data);
+            response.setPesan(SUCCESS);
+            response.setStatus(HttpStatus.OK);
+        } catch (FailedException fe){
+            response.setData("");
+            response.setPesan(fe.getMessage() + "gagal find mahasiswa join jurusan");
+            response.setStatus(HttpStatus.BAD_REQUEST);
+        }
+        return response;
     }
 
 

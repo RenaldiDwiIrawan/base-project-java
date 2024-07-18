@@ -18,11 +18,11 @@
             <scope>runtime</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>id.base_project_renaldi</groupId>-->
-<!--            <artifactId>base_project_common</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>id.base_project_renaldi</groupId>
+            <artifactId>base_project_common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 
