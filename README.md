@@ -62,6 +62,9 @@ This is a base project template for a Spring Boot application that includes the 
    
 5. Run the Spring Boot application:
     ```bash
+    cd .\base_project_service
+    ```
+    ```bash
     mvn spring-boot:run
     ```
 
