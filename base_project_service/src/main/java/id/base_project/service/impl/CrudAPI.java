@@ -60,10 +60,10 @@ public class CrudAPI implements IMahasiswa {
         mapperCodeJurusan(codeJurusan);
         mapperMahasiswa(request);
 
-        filled.setNim(mapperMahasiswa(request).getNim());
-        filled.setNamaMahasiswa(mapperMahasiswa(request).getNamaMahasiswa());
-        filled.setSemesterMahasiswa(mapperMahasiswa(request).getSemesterMahasiswa());
-        filled.setActiveMahasiswa(mapperMahasiswa(request).getActiveMahasiswa());
+        filled.setNim(request.getNim());
+        filled.setNamaMahasiswa(request.getNamaMahasiswa());
+        filled.setSemesterMahasiswa(request.getSemesterMahasiswa());
+        filled.setActiveMahasiswa(request.isMahasiswaActive());
         filled.setJurusan(mapperCodeJurusan(codeJurusan));
 
         response.setData(filled);

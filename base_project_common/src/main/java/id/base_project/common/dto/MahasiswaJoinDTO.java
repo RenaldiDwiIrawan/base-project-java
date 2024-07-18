@@ -10,7 +10,6 @@ public class MahasiswaJoinDTO {
     Integer semesterMahasiswa;
     boolean activeMahasiswa;
     JurusanDTO Jurusan;
-    MatkulDTO Matkul;
 
     public String getNamaMahasiswa() {
         return namaMahasiswa;
@@ -52,11 +51,4 @@ public class MahasiswaJoinDTO {
         Jurusan = jurusan;
     }
 
-    public MatkulDTO getMatkul() {
-        return Matkul;
-    }
-
-    public void setMatkul(MatkulDTO matkul) {
-        Matkul = matkul;
-    }
 }

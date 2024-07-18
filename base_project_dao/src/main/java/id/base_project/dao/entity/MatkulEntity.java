@@ -1,7 +1,5 @@
 package id.base_project.dao.entity;
 
-import javafx.css.StyleableIntegerProperty;
-
 import javax.persistence.*;
 
 @Entity

@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  dbkampusku:
+    image: postgres:latest
+    volumes:
+#      - C:\Users\HUAWEI\Documents\base_project\kampusku:/var/lib/postgresql/data
+      - C:\Users\HUAWEI\Documents\base_project\kampusku:/var/run/postgresql/
+    ports:
+      - "5431:5432"
+    environment:
+      POSTGRES_DB: dbkampusku
+      POSTGRES_USER: dbkampusku
+      POSTGRES_PASSWORD: rahasia
