@@ -70,7 +70,7 @@ This is a base project template for a Spring Boot application that includes the 
 
 ## API Documentation
 
-- **Postman Collection**: [Download Here](https://drive.google.com/file/d/1_6c7tpL89bXEgSiKIT7qYjhsZ7KQOxE5/view?usp=sharing)
+- **Postman Collection**: [Download Here](https://drive.google.com/file/d/1SEgw5-CJTOlBw2kOOhPMC8zaEXZye96r/view?usp=sharing) [update 19jul2024]
 - **Swagger UI**: [Swagger Documentation](http://localhost:8088/swagger-ui/index.html#/Kampus)
 
 ## Features
@@ -116,7 +116,7 @@ This is a base project template for a Spring Boot application that includes the 
     ```bash
     http://localhost:8088/swagger-ui.html
     ``` 
-- Postman Collection: [Download Here](https://drive.google.com/file/d/1_6c7tpL89bXEgSiKIT7qYjhsZ7KQOxE5/view?usp=sharing)
+- Postman Collection: [Download Here](https://drive.google.com/file/d/1SEgw5-CJTOlBw2kOOhPMC8zaEXZye96r/view?usp=sharing) [update 19jul2024]
 
 - Example API endpoints:
   - `GET localhost:8088/base-project/getAllMahasiswa` - Retrieve all mahasiswa
