@@ -4,7 +4,7 @@
 This is a base project template for a Spring Boot application that includes the following features:
 - CRUD operations ✅ 
 - Custom response handling ✅
-- Logging [SOON]
+- Logging ✅
 - File interceptor [SOON]
 - Caching API [SOON]
 - RESTful API ✅
@@ -38,8 +38,6 @@ This is a base project template for a Spring Boot application that includes the 
 - Java 8 or higher
 - Maven 3.6 or higher
 - Docker (optional, for containerization)
-- Kafka (for Kafka integration)
-- Redis
 
 ## Installation
 1. Clone the repository:
@@ -114,7 +112,8 @@ This is a base project template for a Spring Boot application that includes the 
 - Access Swagger UI for API documentation and testing:
     ```bash
     http://localhost:8088/swagger-ui.html
-    ```
+    ``` 
+- Postman Collection: [Download Here](https://drive.google.com/file/d/1_6c7tpL89bXEgSiKIT7qYjhsZ7KQOxE5/view?usp=sharing)
 
 - Example API endpoints:
   - `GET localhost:8088/base-project/getAllMahasiswa` - Retrieve all mahasiswa
