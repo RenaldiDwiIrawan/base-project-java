@@ -4,13 +4,13 @@
 This is a base project template for a Spring Boot application that includes the following features:
 - CRUD operations ✅ 
 - Custom response handling ✅
-- Logging [SOON]
+- Logging ✅
 - File interceptor [SOON]
 - Caching API [SOON]
 - RESTful API ✅
 - Apache Kafka integration [SOON]
 - Redis [SOON]
-- Docker configuration [SOON]
+- Docker configuration ✅
 
 <!--
 ## Table of Contents
@@ -38,8 +38,6 @@ This is a base project template for a Spring Boot application that includes the 
 - Java 8 or higher
 - Maven 3.6 or higher
 - Docker (optional, for containerization)
-- Kafka (for Kafka integration)
-- Redis
 
 ## Installation
 1. Clone the repository:
@@ -51,15 +49,18 @@ This is a base project template for a Spring Boot application that includes the 
     ```bash
     mvn clean install
     ```
-<!--
-## Running the Application
-1. Start Kafka and Zookeeper:
-    ```bash
-    docker-compose up -d
-    ``` */
--->
 
-2. Run the Spring Boot application:
+3. Build Dockerfile
+   ```bash
+   docker build -t base_project_renaldi:v1.0.1 .
+   ```
+
+4. Up Docker Compose
+   ```bash
+   docker-compose up -d
+   ```
+   
+5. Run the Spring Boot application:
     ```bash
     mvn spring-boot:run
     ```
@@ -80,10 +81,6 @@ This is a base project template for a Spring Boot application that includes the 
 - Global exception handling for managing errors and exceptions.
 
 <!--
-### Logging
-- Logging configuration using Logback.
-- Custom log format and log file rotation.
-
 ### File Interceptor
 - Interceptor for handling file uploads and downloads.
 - Example implementation for file validation and processing.
@@ -99,29 +96,32 @@ This is a base project template for a Spring Boot application that includes the 
 ### Kafka Integration
 - Kafka producer and consumer for asynchronous message processing.
 - Example implementation for sending and receiving messages.
+-->
 
 ### Docker
 - Dockerfile for containerizing the application.
-- Docker Compose configuration for managing dependencies (e.g., Kafka, Zookeeper).
+- Docker Compose configuration for managing dependencies (PostgreSQL).
+
 
 ## Configuration
 - Configuration files located in `src/main/resources`:
   - `application.properties`
-  - `logback-spring.xml`
 - Update configurations as needed for your environment.
 
 ## Usage
 - Access Swagger UI for API documentation and testing:
     ```bash
-    http://localhost:8080/swagger-ui.html
-    ```
+    http://localhost:8088/swagger-ui.html
+    ``` 
+- Postman Collection: [Download Here](https://drive.google.com/file/d/1_6c7tpL89bXEgSiKIT7qYjhsZ7KQOxE5/view?usp=sharing)
 
 - Example API endpoints:
-  - `GET /api/users` - Retrieve all users
-  - `POST /api/users` - Create a new user
-  - `PUT /api/users/{id}` - Update an existing user
-  - `DELETE /api/users/{id}` - Delete a user
+  - `GET localhost:8088/base-project/getAllMahasiswa` - Retrieve all mahasiswa
+  - `POST localhost:8088/base-project/addMahasiswa` - Create a new mahasiswa
+  - `PUT localhost:8088/base-project/updateMahasiswaById/9` - Update an existing mahasiswa
+  - `DELETE localhost:8088/base-project/deleteMahasiswaById/5` - Delete a mahasiswa
 
+<!--
 - Kafka integration example:
   - Send a message to Kafka topic: `POST /api/messages`
   - Consume messages from Kafka topic
