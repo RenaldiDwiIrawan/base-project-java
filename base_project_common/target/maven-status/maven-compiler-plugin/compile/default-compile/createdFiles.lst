@@ -1,0 +1,7 @@
+id\base_project\common\exception\FailedException.class
+id\base_project\common\dto\JurusanDTO.class
+id\base_project\common\dto\MahasiswaDTO.class
+id\base_project\common\dto\MatkulDTO.class
+id\base_project\common\response\Response.class
+id\base_project\common\dto\MahasiswaJoinDTO.class
+id\base_project\common\exception\ExceptionHandling.class

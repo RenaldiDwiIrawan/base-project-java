@@ -1,31 +1,20 @@
 package id.base_project.common.dto;
 
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
 public class JurusanDTO {
+
+    @Getter @Setter
     String codeJurusan;
+
+    @Getter @Setter
     String namaJurusan;
+
+    @Getter @Setter
     String fakultas;
 
-    public String getCodeJurusan() {
-        return codeJurusan;
-    }
-
-    public void setCodeJurusan(String codeJurusan) {
-        this.codeJurusan = codeJurusan;
-    }
-
-    public String getNamaJurusan() {
-        return namaJurusan;
-    }
-
-    public void setNamaJurusan(String namaJurusan) {
-        this.namaJurusan = namaJurusan;
-    }
-
-    public String getFakultas() {
-        return fakultas;
-    }
-
-    public void setFakultas(String fakultas) {
-        this.fakultas = fakultas;
-    }
 }

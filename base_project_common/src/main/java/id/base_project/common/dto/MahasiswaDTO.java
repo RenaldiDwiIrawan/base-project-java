@@ -1,50 +1,27 @@
 package id.base_project.common.dto;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
 public class MahasiswaDTO {
+
+    @Getter
+    @Setter
     String namaMahasiswa;
+
+    @Getter @Setter
     String nim;
+
+    @Getter @Setter
     Integer semesterMahasiswa;
+
+    @Getter @Setter
     boolean mahasiswaActive;
+
+    @Getter @Setter
     String jurusan;
 
-    public String getNamaMahasiswa() {
-        return namaMahasiswa;
-    }
-
-    public void setNamaMahasiswa(String namaMahasiswa) {
-        this.namaMahasiswa = namaMahasiswa;
-    }
-
-    public String getNim() {
-        return nim;
-    }
-
-    public void setNim(String nim) {
-        this.nim = nim;
-    }
-
-    public Integer getSemesterMahasiswa() {
-        return semesterMahasiswa;
-    }
-
-    public void setSemesterMahasiswa(Integer semesterMahasiswa) {
-        this.semesterMahasiswa = semesterMahasiswa;
-    }
-
-    public boolean isMahasiswaActive() {
-        return mahasiswaActive;
-    }
-
-    public void setMahasiswaActive(boolean mahasiswaActive) {
-        this.mahasiswaActive = mahasiswaActive;
-    }
-
-    public String getJurusan() {
-        return jurusan;
-    }
-
-    public void setJurusan(String jurusan) {
-        this.jurusan = jurusan;
-    }
 
 }
